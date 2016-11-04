@@ -1,10 +1,13 @@
 package consumer.car.com.carconsumer.util;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import java.util.List;
 
+import consumer.car.com.carconsumer.R;
 import consumer.car.com.carconsumer.interfaces.OnPostTaskInterface;
 import consumer.car.com.carconsumer.model.Car;
 
@@ -19,9 +22,26 @@ public class CarInfoConnect extends AsyncTask<String, Void, List<Car>> {
     private QueryRequest queryRequest;
     private ParseJSONToJava parseJSONToJava;
     private List<Car> carsList;
+    private Dialog progress;
+    private Context context;
 
-    public CarInfoConnect(OnPostTaskInterface mOnPostTaskInterface){
+    public CarInfoConnect(OnPostTaskInterface mOnPostTaskInterface, Context context){
         this.mOnPostTaskInterface = mOnPostTaskInterface;
+        this.context = context;
+    }
+
+    /**
+     * This method execute the progress bar on layout while process the user request
+     */
+    @Override
+    protected void onPreExecute() {
+
+        progress = new Dialog(context, R.style.CustomProgressBar);
+        progress.setContentView(R.layout.component_progress_bar);
+        progress.setTitle("Loading data...");
+
+        progress.show();
+
     }
 
     @Override
@@ -48,6 +68,10 @@ public class CarInfoConnect extends AsyncTask<String, Void, List<Car>> {
     @Override
     protected void onPostExecute(List<Car> cars) {
         Log.i(TAG, "CarInfoConnect.onPostExecute() inside method - param: " + cars.size());
+        // Stops the progress bar
+        if (progress.isShowing()){
+            progress.dismiss();
+        }
 
         mOnPostTaskInterface.onTaskCompleted(cars);
 

@@ -5,11 +5,12 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
     android:background="@color/backgroundCars"
+    card_view:cardPreventCornerOverlap="false"
+    card_view:cardUseCompatPadding="true"
+    card_view:contentPadding="10dp"
     card_view:cardCornerRadius="8dp"
-    android:layout_margin="5dp"
-    android:layout_marginBottom="10dp">
+    card_view:cardElevation="6dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -19,6 +20,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             card_view:srcCompat="@color/backgroundCars"
             android:id="@+id/imageView_car_type" />
 

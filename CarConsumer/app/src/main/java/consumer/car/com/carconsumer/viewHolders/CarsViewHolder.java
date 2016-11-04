@@ -27,11 +27,13 @@ public class CarsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         textViewName = (TextView) itemView.findViewById(R.id.textview_name);
         textViewType = (TextView) itemView.findViewById(R.id.textview_type);
         textViewdescription = (TextView) itemView.findViewById(R.id.textview_description);
+
+        itemView.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(view.getContext(), textViewdescription.getText(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(view.getContext(), getAdapterPosition() + " - " + textViewdescription.getText(), Toast.LENGTH_SHORT).show();
 
     }
 

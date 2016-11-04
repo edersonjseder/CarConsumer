@@ -48,7 +48,7 @@ public class CarFragmentWeb extends Fragment implements OnPostTaskInterface {
 
     private void instantiateObjects(){
         mOnPostTaskInterface = this;
-        carConnect = new CarInfoConnect(mOnPostTaskInterface);
+        carConnect = new CarInfoConnect(mOnPostTaskInterface, getContext());
         carConnect.execute();
     }
 

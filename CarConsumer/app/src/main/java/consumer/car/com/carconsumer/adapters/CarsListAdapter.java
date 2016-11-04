@@ -28,6 +28,7 @@ public class CarsListAdapter extends RecyclerView.Adapter<CarsViewHolder> {
 
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.component_card_view_cars, viewGroup, false);
         CarsViewHolder carsViewHolder = new CarsViewHolder(view);
+        view.setTag(carsViewHolder);
 
         return carsViewHolder;
     }
@@ -46,5 +47,18 @@ public class CarsListAdapter extends RecyclerView.Adapter<CarsViewHolder> {
     @Override
     public int getItemCount() {
         return carList.size();
+    }
+
+    // Insert a new item to the RecyclerView on a predefined position
+    public void insert(int position, Car car) {
+        carList.add(position, car);
+        notifyItemInserted(position);
+    }
+
+    // Remove a RecyclerView item containing a specified Data object
+    public void remove(Car car) {
+        int position = carList.indexOf(car);
+        carList.remove(position);
+        notifyItemRemoved(position);
     }
 }

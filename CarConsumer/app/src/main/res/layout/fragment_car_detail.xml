@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="RtlHardcoded" >
+
+    <!-- The AppBar Component for this layout is here -->
+    <include layout="@layout/component_app_bar_layout_cars" />
+
+    <!-- The NestedScrollView component for this layout is here (Main Car Description) -->
+    <include layout="@layout/component_nested_scroll_view_layout_cars" />
+
+    <!-- The ToolBar component for this layout is here -->
+    <include layout="@layout/component_tool_bar_layout_cars" />
+
+</android.support.design.widget.CoordinatorLayout>

@@ -8,6 +8,7 @@
     <color name="Blue_800">#ff2a56c6</color>
     <color name="colorName">#ff303f9f</color>
     <color name="foreground">#7d9fcf</color>
+    <color name="verification_contact_background">#7d9fcf</color>
     <color name="background">#b3b3e5</color>
     <color name="transparent">#30FFFFFF</color>
 </resources>

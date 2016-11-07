@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import consumer.car.com.carconsumer.R;
+import consumer.car.com.carconsumer.interfaces.ItemClickListener;
 
 /**
  * Created by root on 01/11/16.
@@ -15,9 +16,9 @@ import consumer.car.com.carconsumer.R;
 public class CarsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private TextView textViewName;
-    private TextView textViewdescription;
     private TextView textViewType;
     private ImageView imageViewCarType;
+    private ItemClickListener mItemClickListener;
 
 
     public CarsViewHolder(View itemView) {
@@ -26,14 +27,20 @@ public class CarsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         imageViewCarType = (ImageView) itemView.findViewById(R.id.imageView_car_type);
         textViewName = (TextView) itemView.findViewById(R.id.textview_name);
         textViewType = (TextView) itemView.findViewById(R.id.textview_type);
-        textViewdescription = (TextView) itemView.findViewById(R.id.textview_description);
 
         itemView.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(view.getContext(), getAdapterPosition() + " - " + textViewdescription.getText(), Toast.LENGTH_SHORT).show();
+
+        this.mItemClickListener.onItemClick(view, getLayoutPosition());
+
+    }
+
+    public void setItemClickListener(ItemClickListener itemClickListener) {
+
+        this.mItemClickListener = itemClickListener;
 
     }
 
@@ -51,14 +58,6 @@ public class CarsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     public void setTextViewName(TextView textViewName) {
         this.textViewName = textViewName;
-    }
-
-    public TextView getTextViewdescription() {
-        return textViewdescription;
-    }
-
-    public void setTextViewdescription(TextView textViewdescription) {
-        this.textViewdescription = textViewdescription;
     }
 
     public TextView getTextViewType() {

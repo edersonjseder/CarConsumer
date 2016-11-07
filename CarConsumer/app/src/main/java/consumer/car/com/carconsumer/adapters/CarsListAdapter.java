@@ -1,5 +1,6 @@
 package consumer.car.com.carconsumer.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import consumer.car.com.carconsumer.R;
+import consumer.car.com.carconsumer.interfaces.ItemClickListener;
 import consumer.car.com.carconsumer.model.Car;
 import consumer.car.com.carconsumer.viewHolders.CarsViewHolder;
 
@@ -18,15 +20,19 @@ import consumer.car.com.carconsumer.viewHolders.CarsViewHolder;
 public class CarsListAdapter extends RecyclerView.Adapter<CarsViewHolder> {
 
     private List<Car> carList;
+    private Context context;
+    private ItemClickListener listener;
+    private CarsViewHolder carsViewHolder;
 
-    public CarsListAdapter(List<Car> carList){
+    public CarsListAdapter(List<Car> carList, Context context) {
         this.carList = carList;
+        this.context = context;
     }
 
     @Override
     public CarsViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.component_card_view_cars, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.component_card_view_cars_list, viewGroup, false);
         CarsViewHolder carsViewHolder = new CarsViewHolder(view);
         view.setTag(carsViewHolder);
 
@@ -36,11 +42,22 @@ public class CarsListAdapter extends RecyclerView.Adapter<CarsViewHolder> {
     @Override
     public void onBindViewHolder(CarsViewHolder carsViewHolder, int position) {
 
-        Car car = carList.get(position);
+        // Gets the position of the item on the List and add the object information
+        final Car car = carList.get(position);
         carsViewHolder.getImageViewCarType().setImageBitmap(car.getCarImageByte());
         carsViewHolder.getTextViewName().setText(car.getName());
         carsViewHolder.getTextViewType().setText(car.getType());
-        carsViewHolder.getTextViewdescription().setText(car.getDescription());
+
+        // Listener to the card view item to show a detail when is clicked
+//        carsViewHolder.setItemClickListener(listener);
+
+        this.carsViewHolder = carsViewHolder;
+
+    }
+
+    public void setOnItemClickListener(ItemClickListener listener) {
+
+        carsViewHolder.setItemClickListener(listener);
 
     }
 

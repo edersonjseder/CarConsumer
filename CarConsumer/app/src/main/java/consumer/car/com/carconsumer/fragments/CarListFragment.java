@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
 import java.util.List;
 
@@ -31,11 +33,11 @@ public class CarListFragment extends Fragment implements OnPostTaskInterface {
     private static final String TAG = "CarListFragment";
 
     private CarListFragment.OnFragmentInteractionListener mListener;
+    private CarListFragmentListener fragmentListener;
     private OnPostTaskInterface mOnPostTaskInterface;
     private CarInfoConnect carConnect;
     private RecyclerView recyclerViewCars;
     private CarsListAdapter carsListAdapter;
-    private CarListFragmentListener fragmentListener;
 
     @Nullable
     @Override
@@ -79,14 +81,8 @@ public class CarListFragment extends Fragment implements OnPostTaskInterface {
 
         carsListAdapter = new CarsListAdapter(car, getContext());
         recyclerViewCars.setAdapter(carsListAdapter);
-        carsListAdapter.setOnItemClickListener(new ItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                
-            }
-        });
-    }
 
+    }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

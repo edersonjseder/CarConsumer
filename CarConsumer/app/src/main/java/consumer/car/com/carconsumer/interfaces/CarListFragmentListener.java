@@ -1,5 +1,7 @@
 package consumer.car.com.carconsumer.interfaces;
 
+import consumer.car.com.carconsumer.model.Car;
+
 /**
  * Created by root on 06/11/16.
  */
@@ -7,6 +9,6 @@ package consumer.car.com.carconsumer.interfaces;
 public interface CarListFragmentListener {
 
     // called when user selects a contact
-    public void onCarItemSelected(long rowID);
+    public void onCarItemSelected(Car car, int position);
 
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:scrollbars="none"
-    app:behavior_overlapTop="30dp"
+    app:behavior_overlapTop="20dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <include layout="@layout/component_card_view_cars_detail" />

@@ -4,30 +4,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/id_main_widget_toolbar_cars"
     android:layout_width="match_parent"
+    android:layout_gravity="bottom|center_horizontal"
     android:layout_height="?attr/actionBarSize"
-    android:background="@color/backgroundCars"
-    app:layout_anchor="@id/id_frame_layout_title_colapsing_tool_bar_layout_car"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark"
-    app:title="" >
+    android:background="@color/colorPrimaryDark"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark" >
+<!--app:layout_anchor="@id/id_frame_layout_title_colapsing_tool_bar_layout_car"-->
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
-        <Space
+        <!--Space
             android:layout_width="@dimen/image_final_width"
-            android:layout_height="@dimen/image_final_width"
-            />
+            android:layout_height="15dp"/-->
 
         <TextView
             android:id="@+id/id_tool_bar_car_name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
             android:gravity="center_vertical"
-            android:textColor="@android:color/white"
+            android:textColor="@color/cardview_light_background"
             android:textSize="20sp" />
 
     </LinearLayout>

@@ -5,10 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.List;
 
 import consumer.car.com.carconsumer.R;
+import consumer.car.com.carconsumer.interfaces.CarListFragmentListener;
 import consumer.car.com.carconsumer.interfaces.ItemClickListener;
 import consumer.car.com.carconsumer.model.Car;
 import consumer.car.com.carconsumer.viewHolders.CarsViewHolder;
@@ -21,8 +23,8 @@ public class CarsListAdapter extends RecyclerView.Adapter<CarsViewHolder> {
 
     private List<Car> carList;
     private Context context;
-    private ItemClickListener listener;
     private CarsViewHolder carsViewHolder;
+    private View.OnClickListener onClickListener;
 
     public CarsListAdapter(List<Car> carList, Context context) {
         this.carList = carList;
@@ -49,15 +51,12 @@ public class CarsListAdapter extends RecyclerView.Adapter<CarsViewHolder> {
         carsViewHolder.getTextViewType().setText(car.getType());
 
         // Listener to the card view item to show a detail when is clicked
-//        carsViewHolder.setItemClickListener(listener);
-
-        this.carsViewHolder = carsViewHolder;
-
-    }
-
-    public void setOnItemClickListener(ItemClickListener listener) {
-
-        carsViewHolder.setItemClickListener(listener);
+        carsViewHolder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                ((CarListFragmentListener)context).onCarItemSelected(car, position);
+            }
+        });
 
     }
 
@@ -78,4 +77,5 @@ public class CarsListAdapter extends RecyclerView.Adapter<CarsViewHolder> {
         carList.remove(position);
         notifyItemRemoved(position);
     }
+
 }

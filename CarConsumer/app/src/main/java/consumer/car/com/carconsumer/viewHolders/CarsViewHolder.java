@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import consumer.car.com.carconsumer.R;
+import consumer.car.com.carconsumer.interfaces.CarListFragmentListener;
 import consumer.car.com.carconsumer.interfaces.ItemClickListener;
 
 /**
@@ -18,8 +19,7 @@ public class CarsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private TextView textViewName;
     private TextView textViewType;
     private ImageView imageViewCarType;
-    private ItemClickListener mItemClickListener;
-
+    private ItemClickListener itemClickListener;
 
     public CarsViewHolder(View itemView) {
         super(itemView);
@@ -29,19 +29,16 @@ public class CarsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         textViewType = (TextView) itemView.findViewById(R.id.textview_type);
 
         itemView.setOnClickListener(this);
+
     }
 
     @Override
-    public void onClick(View view) {
-
-        this.mItemClickListener.onItemClick(view, getLayoutPosition());
-
+    public void onClick(View v) {
+        itemClickListener.onItemClick(v, getLayoutPosition());
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
-
-        this.mItemClickListener = itemClickListener;
-
+        this.itemClickListener = itemClickListener;
     }
 
     public ImageView getImageViewCarType() {

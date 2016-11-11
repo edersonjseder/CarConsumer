@@ -1,5 +1,6 @@
 package consumer.car.com.carconsumer.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -17,12 +18,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import consumer.car.com.carconsumer.R;
+import consumer.car.com.carconsumer.model.Car;
 
 /**
  * Created by root on 05/11/16.
  */
 
 public class CarDetailFragment extends Fragment implements AppBarLayout.OnOffsetChangedListener {
+
+    public static final String POSITION = "position";
+    public static final String CAR = "car";
 
     private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR  = 0.9f;
     private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS     = 0.3f;
@@ -41,11 +46,19 @@ public class CarDetailFragment extends Fragment implements AppBarLayout.OnOffset
     private AppBarLayout mAppBarLayout;
     private Toolbar mToolbar;
 
+    private Car car;
+    private int position;
+    private int idCar;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_car_detail, container, false);
+
+        Intent intent = getActivity().getIntent();
+
+        car = (Car) intent.getSerializableExtra(CAR);
 
         // The ID reference of the component_tool_bar_layout_cars file
         mToolbar        = (Toolbar) v.findViewById(R.id.id_main_widget_toolbar_cars);
@@ -81,7 +94,20 @@ public class CarDetailFragment extends Fragment implements AppBarLayout.OnOffset
         mToolbar.inflateMenu(R.menu.menu_main_cars);
         startAlphaAnimation(mTitle, 0, View.INVISIBLE);
 
+        addLayoutFieldsData(car);
+
         return v;
+    }
+
+    private void addLayoutFieldsData(Car car) {
+
+        idCar = car.getId();
+
+        detailTextViewCarType.setText(car.getType());
+        idScrollViewTextViewCarDescription.setText(car.getDescription());
+        detailTextViewCarName.setText(car.getName());
+        mTitle.setText(car.getName());
+        idImageViewAppBarCar.setImageBitmap(car.getCarImageByte());
     }
 
     @Override

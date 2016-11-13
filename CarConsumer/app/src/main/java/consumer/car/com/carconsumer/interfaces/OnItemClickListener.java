@@ -6,7 +6,7 @@ import android.view.View;
  * Created by root on 05/11/16.
  */
 
-public interface ItemClickListener {
+public interface OnItemClickListener {
 
     void onItemClick(View view, int position);
 

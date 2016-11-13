@@ -4,11 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import consumer.car.com.carconsumer.R;
-import consumer.car.com.carconsumer.interfaces.CarListFragmentListener;
-import consumer.car.com.carconsumer.interfaces.ItemClickListener;
+import consumer.car.com.carconsumer.interfaces.OnItemClickListener;
 
 /**
  * Created by root on 01/11/16.
@@ -19,7 +17,7 @@ public class CarsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private TextView textViewName;
     private TextView textViewType;
     private ImageView imageViewCarType;
-    private ItemClickListener itemClickListener;
+    private OnItemClickListener onItemClickListener;
 
     public CarsViewHolder(View itemView) {
         super(itemView);
@@ -34,11 +32,11 @@ public class CarsViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        itemClickListener.onItemClick(v, getLayoutPosition());
+        onItemClickListener.onItemClick(v, getLayoutPosition());
     }
 
-    public void setItemClickListener(ItemClickListener itemClickListener) {
-        this.itemClickListener = itemClickListener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     public ImageView getImageViewCarType() {

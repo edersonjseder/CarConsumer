@@ -4,24 +4,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import java.util.List;
 
 import consumer.car.com.carconsumer.R;
 import consumer.car.com.carconsumer.adapters.CarsListAdapter;
-import consumer.car.com.carconsumer.interfaces.CarListFragmentListener;
-import consumer.car.com.carconsumer.interfaces.ItemClickListener;
-import consumer.car.com.carconsumer.interfaces.OnPostTaskInterface;
+import consumer.car.com.carconsumer.interfaces.OnCarItemSelectedListener;
+import consumer.car.com.carconsumer.interfaces.OnPostTaskListener;
 import consumer.car.com.carconsumer.model.Car;
 import consumer.car.com.carconsumer.util.CarInfoConnect;
 
@@ -29,12 +24,12 @@ import consumer.car.com.carconsumer.util.CarInfoConnect;
  * Created by ederson.js on 31/10/2016.
  */
 
-public class CarListFragment extends Fragment implements OnPostTaskInterface {
+public class CarListFragment extends Fragment implements OnPostTaskListener {
     private static final String TAG = "CarListFragment";
 
     private CarListFragment.OnFragmentInteractionListener mListener;
-    private CarListFragmentListener fragmentListener;
-    private OnPostTaskInterface mOnPostTaskInterface;
+    private OnCarItemSelectedListener fragmentListener;
+    private OnPostTaskListener mOnPostTaskListener;
     private CarInfoConnect carConnect;
     private RecyclerView recyclerViewCars;
     private CarsListAdapter carsListAdapter;
@@ -54,8 +49,8 @@ public class CarListFragment extends Fragment implements OnPostTaskInterface {
     }
 
     private void instantiateObjects(){
-        mOnPostTaskInterface = this;
-        carConnect = new CarInfoConnect(mOnPostTaskInterface, getContext());
+        mOnPostTaskListener = this;
+        carConnect = new CarInfoConnect(mOnPostTaskListener, getContext());
         carConnect.execute();
     }
 

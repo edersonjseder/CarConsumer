@@ -1,18 +1,16 @@
 package consumer.car.com.carconsumer.app;
 
-import android.content.Intent;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import consumer.car.com.carconsumer.R;
 import consumer.car.com.carconsumer.fragments.CarDetailFragment;
 import consumer.car.com.carconsumer.fragments.CarListFragment;
-import consumer.car.com.carconsumer.interfaces.CarListFragmentListener;
+import consumer.car.com.carconsumer.interfaces.OnCarItemSelectedListener;
 import consumer.car.com.carconsumer.model.Car;
 
-public class CarMainActivity extends AppCompatActivity implements CarListFragmentListener {
+public class CarMainActivity extends AppCompatActivity implements OnCarItemSelectedListener {
 
     // key for storing row ID in Bundle passed to a fragment
     public static final String ROW_ID = "row_id";
@@ -44,14 +42,22 @@ public class CarMainActivity extends AppCompatActivity implements CarListFragmen
         try {
             transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.id_car_main_activity, mCarDetailFragment);
+            transaction.addToBackStack("Previous");
             transaction.commit();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-//        Toast.makeText(getBaseContext(), "Item clicked today: " + car.getId() + " - " + car.getName(), Toast.LENGTH_LONG).show();
+    }
 
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     /**

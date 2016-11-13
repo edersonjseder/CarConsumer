@@ -110,6 +110,8 @@ public class CarDetailFragment extends Fragment implements AppBarLayout.OnOffset
         idImageViewAppBarCar.setImageBitmap(car.getCarImageByte());
     }
 
+
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);

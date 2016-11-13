@@ -8,7 +8,7 @@ import android.util.Log;
 import java.util.List;
 
 import consumer.car.com.carconsumer.R;
-import consumer.car.com.carconsumer.interfaces.OnPostTaskInterface;
+import consumer.car.com.carconsumer.interfaces.OnPostTaskListener;
 import consumer.car.com.carconsumer.model.Car;
 
 /**
@@ -18,15 +18,15 @@ import consumer.car.com.carconsumer.model.Car;
 public class CarInfoConnect extends AsyncTask<String, Void, List<Car>> {
     private static final String TAG = "CarInfoConnect";
 
-    private OnPostTaskInterface mOnPostTaskInterface;
+    private OnPostTaskListener mOnPostTaskListener;
     private QueryRequest queryRequest;
     private ParseJSONToJava parseJSONToJava;
     private List<Car> carsList;
     private Dialog progress;
     private Context context;
 
-    public CarInfoConnect(OnPostTaskInterface mOnPostTaskInterface, Context context){
-        this.mOnPostTaskInterface = mOnPostTaskInterface;
+    public CarInfoConnect(OnPostTaskListener mOnPostTaskListener, Context context){
+        this.mOnPostTaskListener = mOnPostTaskListener;
         this.context = context;
     }
 
@@ -73,7 +73,7 @@ public class CarInfoConnect extends AsyncTask<String, Void, List<Car>> {
             progress.dismiss();
         }
 
-        mOnPostTaskInterface.onTaskCompleted(cars);
+        mOnPostTaskListener.onTaskCompleted(cars);
 
     }
 }

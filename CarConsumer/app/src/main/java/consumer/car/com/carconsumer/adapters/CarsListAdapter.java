@@ -5,13 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.List;
 
 import consumer.car.com.carconsumer.R;
-import consumer.car.com.carconsumer.interfaces.CarListFragmentListener;
-import consumer.car.com.carconsumer.interfaces.ItemClickListener;
+import consumer.car.com.carconsumer.interfaces.OnCarItemSelectedListener;
+import consumer.car.com.carconsumer.interfaces.OnItemClickListener;
 import consumer.car.com.carconsumer.model.Car;
 import consumer.car.com.carconsumer.viewHolders.CarsViewHolder;
 
@@ -51,10 +50,10 @@ public class CarsListAdapter extends RecyclerView.Adapter<CarsViewHolder> {
         carsViewHolder.getTextViewType().setText(car.getType());
 
         // Listener to the card view item to show a detail when is clicked
-        carsViewHolder.setItemClickListener(new ItemClickListener() {
+        carsViewHolder.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ((CarListFragmentListener)context).onCarItemSelected(car, position);
+                ((OnCarItemSelectedListener)context).onCarItemSelected(car, position);
             }
         });
 

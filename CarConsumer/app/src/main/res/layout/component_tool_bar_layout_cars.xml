@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_gravity="bottom|center_horizontal"
     android:layout_height="?attr/actionBarSize"
+    app:layout_scrollFlags="scroll|enterAlways"
     android:background="@color/colorPrimaryDark"
     app:theme="@style/ThemeOverlay.AppCompat.Dark" >
 <!--app:layout_anchor="@id/id_frame_layout_title_colapsing_tool_bar_layout_car"-->

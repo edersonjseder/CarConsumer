@@ -34,6 +34,18 @@ public class CarListFragment extends Fragment implements OnPostTaskListener {
     private RecyclerView recyclerViewCars;
     private CarsListAdapter carsListAdapter;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (savedInstanceState != null)
+            return;
+
+        if (savedInstanceState == null) {
+            instantiateObjects();
+        }
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -42,8 +54,6 @@ public class CarListFragment extends Fragment implements OnPostTaskListener {
         recyclerViewCars = (RecyclerView) v.findViewById(R.id.id_recycler_view_cars_list);
         recyclerViewCars.setHasFixedSize(true);
         recyclerViewCars.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        instantiateObjects();
 
         return v;
     }

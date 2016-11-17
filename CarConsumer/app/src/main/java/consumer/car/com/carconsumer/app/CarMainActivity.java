@@ -41,8 +41,9 @@ public class CarMainActivity extends AppCompatActivity implements OnCarItemSelec
 
         try {
             transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.id_car_main_activity, mCarDetailFragment);
-            transaction.addToBackStack("Previous");
+            transaction.add(R.id.id_car_main_activity, mCarDetailFragment);
+            transaction.hide(mCarListFragment);
+            transaction.addToBackStack(mCarListFragment.getClass().getName());
             transaction.commit();
 
         } catch (Exception e) {

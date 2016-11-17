@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,9 +17,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import consumer.car.com.carconsumer.R;
 import consumer.car.com.carconsumer.model.Car;
@@ -44,7 +51,20 @@ public class CarDetailFragment extends Fragment implements AppBarLayout.OnOffset
     private TextView detailTextViewCarType;
     private ImageView idImageViewAppBarCar;
     private AppBarLayout mAppBarLayout;
+    private CollapsingToolbarLayout mCollapsingToolbar;
     private Toolbar mToolbar;
+
+    private FloatingActionButton fab;
+    private FloatingActionButton fab1;
+    private FloatingActionButton fab2;
+
+    private Animation fabOpen;
+    private Animation fabClose;
+    private Animation rotateForward;
+    private Animation rotateBackward;
+
+    private boolean isFabOpen;
+
 
     private Car car;
     private int position;
@@ -69,6 +89,9 @@ public class CarDetailFragment extends Fragment implements AppBarLayout.OnOffset
         // The ID reference id_app_bar_layout_cars from component_app_bar_layout_cars file
         mAppBarLayout   = (AppBarLayout) v.findViewById(R.id.id_app_bar_layout_cars);
 
+        // The ID reference id_collapsing_tool_bar_layout_car from component_collapsing_tool_bar_layout_cars file
+        mCollapsingToolbar   = (CollapsingToolbarLayout) v.findViewById(R.id.id_collapsing_tool_bar_layout_car);
+
         // The ID reference TextView from component_card_view_cars_detail inside component_nested_scroll_view_layuout_cars file
         // (This is the Car description text and will be shown on the main screen of detail fragment)
         idScrollViewTextViewCarDescription = (TextView) v.findViewById(R.id.id_scroll_view_text_view_car_description);
@@ -89,10 +112,30 @@ public class CarDetailFragment extends Fragment implements AppBarLayout.OnOffset
         // (It will be the name of the Car on tool bar)
         idToolBarCarName = (TextView) v.findViewById(R.id.id_tool_bar_car_name);
 
+        fab = (FloatingActionButton) v.findViewById(R.id.fab);
+        fab1 = (FloatingActionButton) v.findViewById(R.id.fab1);
+        fab2 = (FloatingActionButton) v.findViewById(R.id.fab2);
+
+        fabOpen = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
+        fabClose = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
+        rotateForward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_forward);
+        rotateBackward = AnimationUtils.loadAnimation(getContext(), R.anim.rotate_backward);
+
+        fab.setOnClickListener(onClickListener);
+        fab1.setOnClickListener(onClickListener);
+        fab2.setOnClickListener(onClickListener);
 
         mAppBarLayout.addOnOffsetChangedListener(this);
-        mToolbar.inflateMenu(R.menu.menu_main_cars);
+//        mToolbar.inflateMenu(R.menu.menu_main_cars);
         startAlphaAnimation(mTitle, 0, View.INVISIBLE);
+
+//        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getContext(), "Showing text", Toast.LENGTH_LONG).show();
+//            }
+//        });
 
         addLayoutFieldsData(car);
 
@@ -110,6 +153,58 @@ public class CarDetailFragment extends Fragment implements AppBarLayout.OnOffset
         idImageViewAppBarCar.setImageBitmap(car.getCarImageByte());
     }
 
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            int id = v.getId();
+
+            switch (id) {
+                case R.id.fab:
+                    animateFAB();
+                    break;
+
+                case R.id.fab1:
+                    Log.d("Raj", "Fab 1");
+                    Toast.makeText(getContext(), "Fab 1", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case R.id.fab2:
+                    Log.d("Raj", "Fab 2");
+                    Toast.makeText(getContext(), "Fab 2", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    };
+
+
+    public void animateFAB(){
+
+        if(isFabOpen){
+
+            fab.startAnimation(rotateBackward);
+            fab1.startAnimation(fabClose);
+            fab2.startAnimation(fabClose);
+            fab1.setClickable(false);
+            fab2.setClickable(false);
+            fab1.setVisibility(View.INVISIBLE);
+            fab2.setVisibility(View.INVISIBLE);
+            isFabOpen = false;
+            Log.d("Raj", "close");
+
+        } else {
+
+            fab.startAnimation(rotateForward);
+            fab1.startAnimation(fabOpen);
+            fab2.startAnimation(fabOpen);
+            fab1.setClickable(true);
+            fab2.setClickable(true);
+            fab1.setVisibility(View.VISIBLE);
+            fab2.setVisibility(View.VISIBLE);
+            isFabOpen = true;
+            Log.d("Raj","open");
+
+        }
+    }
 
 
     @Override
